@@ -26,7 +26,8 @@ app.post("/", function(req,res){
             const temp = weatherData.main.temp
             const description = weatherData.weather[0].description
             const icon = 'http://openweathermap.org/img/wn/'+weatherData.weather[0].icon+'@2x.png'
-          
+            
+            res.setHeader("Content-Type", "text/html");
             res.write('<h1>The temprature in '+weatherData.name+' is '+temp+' '+unitSymbol+'.</h1>')
             res.write('<p>The weather description: '+description+'.</p>')
             res.write('<img src='+icon+'>')
@@ -38,6 +39,6 @@ app.post("/", function(req,res){
     })
 
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 3000, function(){
     console.log("Server is running on port 3000")
 })
